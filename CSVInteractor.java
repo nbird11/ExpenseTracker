@@ -17,16 +17,11 @@ public class CSVInteractor {
     public static void InitFile() {
         File csvFile = new File(Constants.CSVFILEPATH);
         if (!csvFile.exists()) {
-            // System.out.println("DEBUG: File did not exist, creating new file.");
-
             try {
                 csvFile.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-        } else {
-            // System.out.println("DEBUG: The file already exists.");
         }
 
         try {
@@ -49,13 +44,6 @@ public class CSVInteractor {
                 writer.close();
             }
             scnr.close();
-
-            // FOR DEBUGGING Scanner
-            // scnr = new Scanner(csvFile);
-            // while (scnr.hasNextLine()) {
-            // System.out.println(scnr.nextLine());
-            // }
-            // scnr.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,7 +70,7 @@ public class CSVInteractor {
             while (reader.hasNextLine()) {
                 String[] recordData = reader.nextLine().split(",");
                 System.out.printf("%-15s",
-                        LocalDate.parse(recordData[0], DateTimeFormatter.ofPattern("M-d-yyyy"))
+                        LocalDate.parse(recordData[0], Constants.DEFAULTFORMATTER)
                                 .format(DateTimeFormatter.ofPattern("MMM d, yyyy")));
                 System.out.printf("% -15.2f", Double.parseDouble(recordData[1]));
                 System.out.printf("% -15.2f", Double.parseDouble(recordData[2]));
@@ -159,6 +147,46 @@ public class CSVInteractor {
     }
 
     public static void GetInsights() {
+        System.out.print("What month do you want insights for (as a number 1-12):\n > ");
+        int insightMonth = Integer.parseInt(System.console().readLine());
+        System.out.print("Year:\n > ");
+        int insightYear = Integer.parseInt(System.console().readLine());
+
+        try {
+            Scanner reader = new Scanner(new File(Constants.CSVFILEPATH));
+            // Skip the header
+            reader.nextLine();
+
+            ArrayList<String> lines = new ArrayList<String>();
+            while (reader.hasNextLine()) {
+                lines.add(reader.nextLine());
+            }
+            reader.close();
+
+            double totalExpenses = 0;
+            double totalIncome = 0;
+
+            for (String line : lines) {
+                LocalDate date = LocalDate.parse(line.split(",")[0], Constants.DEFAULTFORMATTER);
+                if (date.getMonthValue() != insightMonth || date.getYear() != insightYear) {
+                    continue;
+                }
+
+                double debitAmount = Double.parseDouble(line.split(",")[1]);
+                if (debitAmount < 0) {
+                    totalExpenses += debitAmount;
+                } else {
+                    totalIncome += debitAmount;
+                }
+            }
+
+            System.out.printf("\nTotal Monthly Expenses: %.2f\n", totalExpenses);
+            System.out.printf("Total Monthly Income: %.2f\n", totalIncome);
+            System.out.printf("\nCash Flow: %.2f", (totalIncome + totalExpenses));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
