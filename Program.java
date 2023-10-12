@@ -17,6 +17,8 @@ public class Program {
         System.out.println("  1. Display all data");
         System.out.println("  2. Add expense record");
         System.out.println("  3. Add income record");
+        System.out.println("  4. Get monthly insights");
+        System.out.println("  5. Get monthly tithing");
         System.out.println("  0. Quit program");
         System.out.println("");
         System.out.print("> ");
@@ -39,6 +41,12 @@ public class Program {
                     break;
                 case 3:
                     CSVInteractor.AddIncome();
+                    break;
+                case 4:
+                    CSVInteractor.GetInsights();
+                    break;
+                case 5:
+                    CSVInteractor.GetTithing();
                     break;
                 case 0:
                     quit = true;

@@ -157,4 +157,12 @@ public class CSVInteractor {
             e.printStackTrace();
         }
     }
+
+    public static void GetInsights() {
+
+    }
+
+    public static void GetTithing() {
+
+    }
 }
