@@ -191,6 +191,40 @@ public class CSVInteractor {
     }
 
     public static void GetTithing() {
+        System.out.print("What month do you want insights for (as a number 1-12):\n > ");
+        int tithingMonth = Integer.parseInt(System.console().readLine());
+        System.out.print("Year:\n > ");
+        int tithingYear = Integer.parseInt(System.console().readLine());
 
+        try {
+            Scanner reader = new Scanner(new File(Constants.CSVFILEPATH));
+            // Skip the header
+            reader.nextLine();
+
+            ArrayList<String> lines = new ArrayList<String>();
+            while (reader.hasNextLine()) {
+                lines.add(reader.nextLine());
+            }
+            reader.close();
+
+            double monthlyIncome = 0;
+
+            for (String line : lines) {
+                LocalDate date = LocalDate.parse(line.split(",")[0], Constants.DEFAULTFORMATTER);
+                if (date.getMonthValue() != tithingMonth || date.getYear() != tithingYear) {
+                    continue;
+                }
+
+                double debitAmount = Double.parseDouble(line.split(",")[1]);
+                if (debitAmount > 0) {
+                    monthlyIncome += debitAmount;
+                }
+            }
+
+            System.out.printf("\nTithing for this month: %.2f", monthlyIncome / 10);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
