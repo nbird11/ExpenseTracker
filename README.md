@@ -53,9 +53,10 @@ Websites that helped with my Java syntax:
 
 #### To Do
 
-- Write doc comments for each function to define code use
 - Refactor methods for isights and tithing to be separate classes that inherit
   from an absctract base class method
+- Refactor CSVInteractor class to have one method for reading all the data and
+  returning a list of line data strings.
 
 #### Features
 
