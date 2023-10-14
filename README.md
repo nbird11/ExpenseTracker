@@ -1,4 +1,4 @@
-# Expense Tracker
+![Title Banner - Expense Tracker](./titleBanner.png)
 
 ## Overview
 
