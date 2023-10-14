@@ -1,5 +1,10 @@
+/**
+ * Entry point for program. Houses main.
+ */
 public class Program {
-
+    /**
+     * Display a fancy title for the program.
+     */
     public static void displayTitle() {
         System.out.println("");
         System.out.println("  ______                                  _______             _             ");
@@ -12,6 +17,11 @@ public class Program {
         System.out.println("             |_|                                                            ");
     }
 
+    /**
+     * Prompt the user what action they want to perform.
+     * 
+     * @return the user's choice of action
+     */
     public static int getAction() {
         System.out.println("\n");
         System.out.println("  1. Display all data");
@@ -27,6 +37,11 @@ public class Program {
         return choice;
     }
 
+    /**
+     * Program main.
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         CSVInteractor.InitFile();
         displayTitle();
