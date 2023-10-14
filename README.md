@@ -60,5 +60,6 @@ Websites that helped with my Java syntax:
 
 #### Features
 
+- Better ascci art for the title banner
 - On close, sort rows chronologically in csv file
 - Somehow autoindicate month/year for insights/tithing
