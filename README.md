@@ -10,7 +10,7 @@ in order to build better financial habits and budget my money more wisely.
 
 Link to YouTube demonstration:
 
-[Expense Tracker - Demo]()
+[Expense Tracker - Demo](https://youtu.be/jgFlINb02KQ)
 
 ## Development Environment
 
